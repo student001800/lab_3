@@ -139,7 +139,6 @@ class CityController extends Controller
         $scale = min(1, 1200 / max(1, $width), 800 / max(1, $height));
         $newWidth = max(1, (int) round($width * $scale));
         $newHeight = max(1, (int) round($height * $scale));
-
         $canvas = imagecreatetruecolor($newWidth, $newHeight);
         $white = imagecolorallocate($canvas, 255, 255, 255);
         imagefill($canvas, 0, 0, $white);
