@@ -1,0 +1,130 @@
+$bg-page: #F4F1DE;
+$bg-header: #3D405B;
+$text-main: #3D405B;
+$text-light: #F4F1DE;
+$accent: #E07A5F;
+$card-base: #81B29A;
+
+$primary: $accent;
+$dark: $bg-header;
+$body-bg: $bg-page;
+$body-color: $text-main;
+
+
+$grid-breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px,
+    xxxl: 1600px
+);
+
+$container-max-widths: (
+    sm: 540px,
+    md: 720px,
+    lg: 960px,
+    xl: 1140px,
+    xxl: 1320px,
+    xxxl: 1500px
+);
+
+@import "bootstrap/scss/bootstrap";
+$fa-font-path: "../../node_modules/@fortawesome/fontawesome-free/webfonts";
+@import "@fortawesome/fontawesome-free/scss/fontawesome";
+@import "@fortawesome/fontawesome-free/scss/solid";
+@import "@fortawesome/fontawesome-free/scss/brands";
+
+.logo-box {
+    width: 35px;
+    height: 35px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    background: $primary;
+    color: #fff;
+    font-weight: 700;
+    font-family: Georgia, serif;
+}
+
+.eyebrow {
+    color: darken($card-base, 25%);
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+
+@mixin card-theme($background, $foreground) {
+    background-color: $background;
+    color: $foreground;
+    border: 2px solid darken($background, 10%);
+
+    .card-title, .card-text { color: $foreground; }
+
+    .btn-outline-primary {
+        color: $foreground;
+        border-color: $foreground;
+        &:hover { background-color: $foreground; color: $background; }
+    }
+}
+
+@for $i from 1 through 5 {
+    .row > .col-12:nth-child(5n + #{$i}) .city-card {
+        $background: darken($card-base, ($i - 1) * 8%);
+        $foreground: if($i >= 4, $text-light, $text-main);
+        @include card-theme($background, $foreground);
+    }
+}
+
+.city-card {
+    border: 0;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(61, 64, 91, .10);
+    transition: transform .2s ease, box-shadow .2s ease;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 14px 30px rgba(61, 64, 91, .16);
+    }
+
+    .card-body { padding: 1.25rem; }
+}
+
+.city-card-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.city-detail-image {
+    width: 100%;
+    max-height: 360px;
+    object-fit: cover;
+}
+
+.detail-card, .form-card {
+    border: 0;
+    border-radius: 1rem;
+    box-shadow: 0 8px 24px rgba(61, 64, 91, .10);
+}
+
+.current-image {
+    display: block;
+    max-width: 240px;
+    max-height: 180px;
+    object-fit: cover;
+    border-radius: .75rem;
+}
+
+.modal-content { border: 0; border-radius: 1rem; overflow: hidden; }
+.modal-header { background: $bg-header; color: $text-light; }
+.modal-header .btn-close { filter: invert(1); }
+
+@media (max-width: 500px) {
+    .container { padding-left: 12px; padding-right: 12px; }
+}
